@@ -1,9 +1,5 @@
 <?php
 class bdClass{
-//$dbuser="tangiers_tangier";
-
-//$pwd="user123";
-//$default_db="tangiers_InvestigatorReport";
 
 	function mysqlConnect($host,$username,$password,$name){
 		$connectect = @mysql_connect($host, $username, $password) or die(mysql_error());
@@ -17,11 +13,9 @@ class bdClass{
 		$value	= $this->rows[$fieldName];
 		return $value;
 	}
-
 }
 
 $bdconnect = new bdClass;
 //('mysqlserver','dbuser','dbpassword','dbname')
 $hello = $bdconnect->mysqlConnect('localhost', 'root', '', 'teacher_evaluation' );
-//$hello = $bdconnect->mysqlConnect('localhost', 'tangiers_tangier', 'user123', 'tangiers_InvestigatorReport' );
 ?>

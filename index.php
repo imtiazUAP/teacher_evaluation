@@ -30,7 +30,7 @@
 					        <p style="font-weight:bold; font-size:24px">Sign In</p>
 					        <p style="font-weight:bold; font-size:24px">Sign In</p>
         <form  action="" method="post" >
-            <div class="tabledv"><div class="registername">Email:</div><div class="registerfield"><input type="text" name="loginname" id="loginname" maxlength="30" size="29" value="" autofocus="autofocus"/></div></div>
+            <div class="tabledv"><div class="registername">Email Address:</div><div class="registerfield"><input type="text" name="loginname" id="loginname" maxlength="30" size="29" value="" autofocus="autofocus"/></div></div>
             <div class="tabledv"><div class="registername">Password:</div><div class="registerfield"><input type="password" name="password" id="password" maxlength="30" size="29" value="" autofocus="autofocus"/></div></div>
             <div class="tabledv"><div class="registername"></div><div class="registerfield"><input name="login" type="submit" value="Log In" /></div>
 			</div>

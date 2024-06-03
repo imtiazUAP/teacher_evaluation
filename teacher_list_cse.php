@@ -1,94 +1,71 @@
 <?php
- session_start();
-  error_reporting(0);
- include("dbconnect.php");
-
-  ?>
-<?php
-$b=$_SESSION['student_email'];
-//$c=$_SESSION['userid'];
-
-
-$userrole = mysql_query("select * from student where student_email='{$b}'");
-$userdata = mysql_fetch_assoc($userrole);
-//echo $userdata['admin'];
+session_start();
+include ("dbconnect.php");
 ?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<?php include("head.php"); ?> 	
+  <?php include ("head.php"); ?>
 </head>
-<body> 
 
+<body>
   <div id="templatemo_wrapper">
-   <?php include("header.php"); ?> 	
-                     
-   <?php include("menu_header.php"); ?> 	
-       
-      
-      	  <div id="templatemo_main_top"></div>
-          <div id="templatemo_main">
-					
-			
-<table class="hoverTable" width="900" border="1" style=" padding-bottom:40px;padding-left:40px;padding-right:40px;" >
-<tr align="center">
-<td width="50" height="50" bgcolor="#516E7C" style="color:#FFFFFF">Teacher Code</td>
-<td width="150" bgcolor="#516E7C" style="color:#FFFFFF">Teacher Name</td>
-<td width="150" bgcolor="#516E7C" style="color:#FFFFFF">Photo</td>
-<td width="80" bgcolor="#516E7C" style="color:#FFFFFF">Rating this Semester</td>
+    <?php include ("header.php"); ?>
+    <?php include ("menu_header.php"); ?>
+    <div id="templatemo_main_top"></div>
+    <div id="templatemo_main">
+      <table class="hoverTable" width="900" border="1"
+        style=" padding-bottom:40px;padding-left:40px;padding-right:40px;">
+        <tr align="center">
+          <td width="50" height="50" bgcolor="#516E7C" style="color:#FFFFFF">Teacher Code</td>
+          <td width="150" bgcolor="#516E7C" style="color:#FFFFFF">Teacher Name</td>
+          <td width="150" bgcolor="#516E7C" style="color:#FFFFFF">Photo</td>
+          <td width="80" bgcolor="#516E7C" style="color:#FFFFFF">Rating this Semester</td>
+        </tr>
+        <?php
+        $dbconnect = new dbClass();
+        $connection = $dbconnect->getConnection();
+        // Prepare the SQL statement
+        $strquery = "SELECT * FROM teachers WHERE dept_id = ?";
+        $stmt = $connection->prepare($strquery);
+        $dept_id = 1; // Assuming department ID is 1
+        $stmt->bind_param("i", $dept_id);
 
-</tr>
+        // Execute the statement
+        $stmt->execute();
+        $results = $stmt->get_result();
 
-
-<?php
-
-$strquery="SELECT * FROM teachers WHERE dept_id='1'";
-$results=mysql_query($strquery);
-$num=mysql_numrows($results);
-
-$i=0;
-while ($i< $num)
-{
-$teachers_id=mysql_result($results,$i,"teachers_id");
-$teachers_code=mysql_result($results,$i,"teachers_code");
-$teachers_name=mysql_result($results,$i,"teachers_name");
-$teachers_photo=mysql_result($results,$i,"teachers_photo");
-?>
-<tr align="center">
-<td height="40"><?php echo $teachers_code ; ?></td>
-<td ><?php echo " <a href='single_result.php?teachers_code=".$teachers_code."'> $teachers_name </a>" ?></td>
-<td width="100"><img src="<?php echo $teachers_photo ?>"  style="height:100px;" ></td>
-<td >4.2</td>
-
-
-</tr>
-<?php
-
-  $i++;
-  }
-  ?>
-  </table>
-  
-       
-              <div class="cleaner"></div>
-            
-        	<div class="cleaner"></div>
-        </div> <!-- end of templatemo_main -->
-        <div id="templatemo_main_bottom"></div>
-   		
-        
-       
-        
-		
-		<?php include("footer.php"); ?> 
-       		
-        
-  <!-- end of templatemo_footer -->
-    
-    </div> 
-	<!-- end of wrapper -->
-
-
+        // Loop through the results
+        while ($row = $results->fetch_assoc()) {
+          $teachers_id = $row['teachers_id'];
+          $teachers_code = $row['teachers_code'];
+          $teachers_name = $row['teachers_name'];
+          $teachers_photo = $row['teachers_photo'];
+          ?>
+          <tr align="center">
+            <td height="40"><?php echo $teachers_code; ?></td>
+            <td>
+              <?php echo "<a href='single_result.php?teachers_code=" . $teachers_code . "'>$teachers_name</a>"; ?>
+            </td>
+            <td width="100"><img src="<?php echo $teachers_photo; ?>" style="height:100px;"></td>
+            <td>4.2</td> <!-- Placeholder for teacher rating -->
+          </tr>
+          <?php
+        }
+        // Close the statement and connection
+        $stmt->close();
+        ?>
+      </table>
+      <div class="cleaner"></div>
+      <div class="cleaner"></div>
+    </div> <!-- end of templatemo_main -->
+    <div id="templatemo_main_bottom"></div>
+    <?php include ("footer.php"); ?>
+    <!-- end of templatemo_footer -->
+  </div>
+  <!-- end of wrapper -->
 </body>
+
 </html>

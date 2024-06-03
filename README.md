@@ -10,9 +10,9 @@ This project was done as part of an assignment during my University time back in
 - **Dynamic Selection:** Dropdown menus dynamically populate with relevant options based on the user's semester and department.
 - **Email Integration:** Students can send emails to instructors directly from the system for further communication.
 
-![Teacher Evaluation Form](https://github.com/imtiazUAP/teacher_evaluation/raw/main/images/form.png)
+![Teacher Evaluation Form](https://github.com/imtiazUAP/teacher_evaluation/raw/master/images/form.png)
 
-![Teacher Profile](https://github.com/imtiazUAP/teacher_evaluation/raw/main/images/teacher-profile.png)
+![Teacher Profile](https://github.com/imtiazUAP/teacher_evaluation/raw/master/images/teacher-profile.png)
 
 
 ## Installation
